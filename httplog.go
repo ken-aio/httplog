@@ -100,10 +100,8 @@ func (l *RequestLoggerEntry) Write(status, bytes int, header http.Header, elapse
 	if !DefaultOptions.Concise {
 		// Include response header, as well for error status codes (>400) we include
 		// the response body so we may inspect the log message sent back to the client.
-		if status >= 400 {
-			body, _ := extra.([]byte)
-			responseLog["body"] = string(body)
-		}
+		body, _ := extra.([]byte)
+		responseLog["body"] = string(body)
 		if len(header) > 0 {
 			responseLog["header"] = headerLogField(header)
 		}
